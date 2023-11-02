@@ -229,7 +229,7 @@ if __name__ == "__main__":
         print("1. Option 1 Tru")
         print("2. Option 2 Trt")
         print("3. Option 3 Tuc")
-        TruCheck = False
+        truCheck = False
         choice = input("Enter your choice: ")
     
         if choice == '1':
