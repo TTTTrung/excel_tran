@@ -5,30 +5,6 @@ import shutil
 from datetime import datetime
 
 
-def choice():
-    print("Choose an option:")
-    print("1. Option 1 Tru")
-    print("2. Option 2 Trt")
-    print("3. Option 3 Tuc")
-    
-    choice = input("Enter your choice: ")
-    
-    if choice == '1':
-        from mapping.Tru_mapping import product_id_mapping_Tru
-        product_id_mapping = product_id_mapping_Tru
-        main(product_id_mapping)
-    elif choice == '2':
-        from mapping.Trt_mapping import product_id_mapping_Trt
-        product_id_mapping = product_id_mapping_Trt
-        main(product_id_mapping)
-    elif choice == '3':
-        from mapping.Tuc_mapping import product_id_mapping_Tuc
-        product_id_mapping = product_id_mapping_Tuc
-        main(product_id_mapping)
-    else:
-        print("Invalid choice. Please select a valid option.")
-
-
 def main(product_id_mapping):
         try:
                 folder_path = input('Pls type a directory name :')
@@ -98,7 +74,7 @@ def main(product_id_mapping):
                 print("An error occurred:", str(e))
 def secondOut(name,product_id_mapping) :
         try:    
-                truCheck ='mapping.Tru_mapping' in globals()
+                global truCheck
                 current_datetime = datetime.now()
                 formatted_datetime = current_datetime.strftime("%Y-%m-%d_%H-%M-%S")  # Use underscores instead of colons
                 directory = f'outfinal/{name}_{formatted_datetime}'  # Use forward slash or backslash as needed
@@ -208,6 +184,7 @@ def secondOut(name,product_id_mapping) :
                 if truCheck:
                         pf.to_excel('{}/pf.xlsx'.format(directory),index=False)
                         soc.to_excel('{}/soc.xlsx'.format(directory), index=False)
+                        print('1')
                 
                 merge(directory)
         except Exception as e:
@@ -248,7 +225,29 @@ def delete_files_in_directory():
         except OSError:
                 print("Error occurred while deleting files.")         
 if __name__ == "__main__":
-        choice()
+        print("Choose an option:")
+        print("1. Option 1 Tru")
+        print("2. Option 2 Trt")
+        print("3. Option 3 Tuc")
+        TruCheck = False
+        choice = input("Enter your choice: ")
+    
+        if choice == '1':
+                from mapping.Tru_mapping import product_id_mapping_Tru
+                product_id_mapping = product_id_mapping_Tru
+                truCheck = True
+                main(product_id_mapping)
+        elif choice == '2':
+                from mapping.Trt_mapping import product_id_mapping_Trt
+                product_id_mapping = product_id_mapping_Trt
+                main(product_id_mapping)
+        elif choice == '3':
+                from mapping.Tuc_mapping import product_id_mapping_Tuc
+                product_id_mapping = product_id_mapping_Tuc
+                main(product_id_mapping)
+        else:
+                print("Invalid choice. Please select a valid option.")
         delete_files_in_directory()
         print('=================================================')
-        print('credit สัณฐิติ มาลี :)')
+        print('credit santhiti malee :)')
+ 
